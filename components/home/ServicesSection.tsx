@@ -232,7 +232,7 @@ export const ServicesSection: React.FC = () => {
   }, []);
 
   const cardWidth = isMobile
-    ? Math.max(280, Math.min(containerWidth - 24, 380))
+    ? Math.max(260, Math.min(containerWidth - 36, 360))
     : 420;
   const cardHeight = isMobile ? 380 : 400;
 
@@ -240,15 +240,17 @@ export const ServicesSection: React.FC = () => {
     if (isMobile) {
       switch (pos) {
         case -1:
-          return { x: -(cardWidth + 40), scale: 0.9, opacity: 0, zIndex: 0 };
+          return { x: -(cardWidth + 40), scale: 0.92, opacity: 0, zIndex: 0 };
         case 0:
           return { x: 0, scale: 1, opacity: 1, zIndex: 30 };
         case 1:
-          return { x: 18, scale: 0.95, opacity: 0.65, zIndex: 20 };
+          // Card 1 shape peeking out clearly on the right with 50% opacity
+          return { x: 20, scale: 0.98, opacity: 0.5, zIndex: 20 };
         case 2:
-          return { x: 30, scale: 0.89, opacity: 0.35, zIndex: 10 };
+          // Card 2 subtle background layer
+          return { x: 32, scale: 0.96, opacity: 0.22, zIndex: 10 };
         default:
-          return { x: 42, scale: 0.82, opacity: 0, zIndex: 0 };
+          return { x: 44, scale: 0.92, opacity: 0, zIndex: 0 };
       }
     }
     // Desktop layout
@@ -494,10 +496,10 @@ export const ServicesSection: React.FC = () => {
                       className={`
                         relative w-full h-full rounded-[22px] sm:rounded-[28px] overflow-hidden
                         flex flex-col justify-between p-5 sm:p-7 md:p-8
-                        shadow-lg
+                        transition-shadow duration-300
                         ${isActive
-                          ? "bg-gradient-to-br from-[#2563eb] via-[#1e54d4] to-[#1941ba]"
-                          : "bg-gradient-to-br from-[#2d6be0] via-[#2457cc] to-[#1e45b2]"
+                          ? "bg-gradient-to-br from-[#2563eb] via-[#1e54d4] to-[#1941ba] shadow-[0_18px_40px_-8px_rgba(20,70,210,0.48),0_6px_16px_rgba(0,0,0,0.12)] ring-1 ring-white/20"
+                          : "bg-gradient-to-br from-[#2a68e0] via-[#2255ce] to-[#1d44b5] shadow-md ring-1 ring-white/10"
                         }
                       `}
                     >
