@@ -67,7 +67,7 @@ export const AboutSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="tentang-kami" className="relative min-h-[95vh] pt-36 pb-36 flex items-center overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-200">
+    <section id="tentang-kami" className="relative min-h-[95vh] pt-36 pb-36 flex items-center overflow-hidden bg-white dark:bg-slate-950 scroll-mt-24 sm:scroll-mt-28 transition-colors duration-200">
       {/* Top Wave Divider */}
       <div className="absolute -top-[1px] left-0 right-0 z-10 pointer-events-none leading-none text-white dark:text-[#0b132b] transition-colors duration-200">
         <svg

@@ -26,7 +26,7 @@ export const ValueAddedSection: React.FC = () => {
   return (
     <section
       id="value-added"
-      className="relative pt-24 pb-32 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden transition-colors duration-200"
+      className="relative pt-24 pb-32 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden scroll-mt-24 sm:scroll-mt-28 transition-colors duration-200"
     >
       <Container size="xl" className="relative z-10">
         

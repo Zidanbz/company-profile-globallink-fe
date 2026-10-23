@@ -204,7 +204,7 @@ export const MapSection: React.FC = () => {
   ];
 
   return (
-    <section id="infrastruktur" className="pt-24 pb-32 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-200">
+    <section id="infrastruktur" className="pt-24 pb-32 bg-white dark:bg-slate-950 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28 transition-colors duration-200">
       {/* Ambient background decoration */}
       <div className="absolute top-1/4 -right-48 w-96 h-96 bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/3 -left-48 w-96 h-96 bg-cyan-400/10 dark:bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />

@@ -195,16 +195,6 @@ const ServiceIcon: React.FC<{ id: string; className?: string }> = ({
   }
 };
 
-/* ─── Stack positions config ─── */
-// pos -1 = exiting to left | pos 0 = front | pos 1 = mid | pos 2 = back | pos 99 = hidden
-const STACK: Record<number, { x: number; scale: number; opacity: number; zIndex: number }> = {
-  [-1]: { x: -560,  scale: 0.88, opacity: 0,    zIndex: 0  },
-  [0]:  { x: 0,     scale: 1,    opacity: 1,    zIndex: 30 },
-  [1]:  { x: 300,   scale: 0.94, opacity: 0.85, zIndex: 20 },
-  [2]:  { x: 375,   scale: 0.88, opacity: 0.45, zIndex: 10 },
-  [99]: { x: 420,   scale: 0.84, opacity: 0,    zIndex: 0  },
-};
-
 /* ─────────────────────────────────────── */
 export const ServicesSection: React.FC = () => {
   const [servicesList, setServicesList] = useState<ServiceItemData[]>(DEFAULT_SERVICES);
@@ -221,9 +211,60 @@ export const ServicesSection: React.FC = () => {
   const [exitingIndex, setExitingIndex]       = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused]               = useState(false);
+  const [containerWidth, setContainerWidth]   = useState<number>(420);
+  const [isMobile, setIsMobile]               = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView   = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  /* ── responsive dimension calculation ── */
+  useEffect(() => {
+    const updateDimensions = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      if (stackContainerRef.current) {
+        setContainerWidth(stackContainerRef.current.clientWidth);
+      }
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
+  const cardWidth = isMobile
+    ? Math.max(280, Math.min(containerWidth - 24, 380))
+    : 420;
+  const cardHeight = isMobile ? 380 : 400;
+
+  const getStackConfig = (pos: number) => {
+    if (isMobile) {
+      switch (pos) {
+        case -1:
+          return { x: -(cardWidth + 40), scale: 0.9, opacity: 0, zIndex: 0 };
+        case 0:
+          return { x: 0, scale: 1, opacity: 1, zIndex: 30 };
+        case 1:
+          return { x: 18, scale: 0.95, opacity: 0.65, zIndex: 20 };
+        case 2:
+          return { x: 30, scale: 0.89, opacity: 0.35, zIndex: 10 };
+        default:
+          return { x: 42, scale: 0.82, opacity: 0, zIndex: 0 };
+      }
+    }
+    // Desktop layout
+    switch (pos) {
+      case -1:
+        return { x: -560, scale: 0.88, opacity: 0, zIndex: 0 };
+      case 0:
+        return { x: 0, scale: 1, opacity: 1, zIndex: 30 };
+      case 1:
+        return { x: 300, scale: 0.94, opacity: 0.85, zIndex: 20 };
+      case 2:
+        return { x: 375, scale: 0.88, opacity: 0.45, zIndex: 10 };
+      default:
+        return { x: 420, scale: 0.84, opacity: 0, zIndex: 0 };
+    }
+  };
 
   /* ── fetch data ── */
   useEffect(() => {
@@ -346,12 +387,10 @@ export const ServicesSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="layanan"
-      className="relative overflow-hidden bg-white dark:bg-[#0b132b] py-24 sm:py-32 transition-colors duration-200"
+      className="relative overflow-hidden bg-white dark:bg-[#0b132b] py-16 sm:py-24 lg:py-32 scroll-mt-24 sm:scroll-mt-28 transition-colors duration-200"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-
-
       <Container size="xl" className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
@@ -369,7 +408,7 @@ export const ServicesSection: React.FC = () => {
               </span>
             </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-[50px] font-extrabold text-slate-950 dark:text-white leading-[1.12] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-[50px] font-extrabold text-slate-950 dark:text-white leading-[1.15] tracking-tight">
               {sectionMeta.services_title} <br />
               <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-slate-900 dark:from-blue-400 dark:via-indigo-300 dark:to-white bg-clip-text text-transparent">
                 {sectionMeta.services_title_highlight}
@@ -382,11 +421,11 @@ export const ServicesSection: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-3 pt-2">
               <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs">
-                <div className="text-xl font-extrabold text-slate-950 dark:text-white">99.9% SLA</div>
+                <div className="text-lg sm:text-xl font-extrabold text-slate-950 dark:text-white">99.9% SLA</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Ketersediaan Jaringan</div>
               </div>
               <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs">
-                <div className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">24/7 Standby</div>
+                <div className="text-lg sm:text-xl font-extrabold text-emerald-600 dark:text-emerald-400">24/7 Standby</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">NOC Engineer Support</div>
               </div>
             </div>
@@ -397,13 +436,13 @@ export const ServicesSection: React.FC = () => {
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 relative select-none"
+            className="lg:col-span-7 relative select-none w-full"
           >
             {/* ── Card Stack ── */}
             <div
               ref={stackContainerRef}
-              className="relative overflow-hidden py-3"
-              style={{ height: 430 }}
+              className="relative overflow-hidden py-3 w-full"
+              style={{ height: cardHeight + 24 }}
               onMouseDown={onDragStart}
               onMouseUp={onDragEnd}
               onTouchStart={onDragStart}
@@ -422,7 +461,7 @@ export const ServicesSection: React.FC = () => {
                   if (stackPos > 2) stackPos = 99; // hidden behind
                 }
 
-                const cfg      = STACK[stackPos] ?? STACK[99];
+                const cfg      = getStackConfig(stackPos);
                 const isActive = stackPos === 0;
                 const features = parseFeatures(service.features);
                 const badgeText = service.badge || "Enterprise Grade";
@@ -440,8 +479,8 @@ export const ServicesSection: React.FC = () => {
                       position: "absolute",
                       top: 12,
                       left: 0,
-                      width: 420,
-                      height: 400,
+                      width: cardWidth,
+                      height: cardHeight,
                       zIndex: cfg.zIndex,
                       transformOrigin: "left center",
                     }}
@@ -453,8 +492,9 @@ export const ServicesSection: React.FC = () => {
                     {/* ── Card Shell ── */}
                     <div
                       className={`
-                        relative w-full h-full rounded-[28px] overflow-hidden
-                        flex flex-col justify-between p-7 sm:p-8
+                        relative w-full h-full rounded-[22px] sm:rounded-[28px] overflow-hidden
+                        flex flex-col justify-between p-5 sm:p-7 md:p-8
+                        shadow-lg
                         ${isActive
                           ? "bg-gradient-to-br from-[#2563eb] via-[#1e54d4] to-[#1941ba]"
                           : "bg-gradient-to-br from-[#2d6be0] via-[#2457cc] to-[#1e45b2]"
@@ -463,35 +503,35 @@ export const ServicesSection: React.FC = () => {
                     >
                       {/* ── Top row: icon + badge ── */}
                       <div className="relative z-10">
-                        <div className="flex items-center justify-between gap-2 mb-6">
-                          <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-white/15 border border-white/20 text-white">
-                            <ServiceIcon id={service.slug} className="w-6 h-6" />
+                        <div className="flex items-center justify-between gap-2 mb-4 sm:mb-6">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 bg-white/15 border border-white/20 text-white">
+                            <ServiceIcon id={service.slug} className="w-5 h-5 sm:w-6 sm:h-6" />
                           </div>
-                          <span className="px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wide bg-white/15 border border-white/20 text-white">
+                          <span className="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wide bg-white/15 border border-white/20 text-white shrink-0 truncate max-w-[160px] sm:max-w-none">
                             {badgeText}
                           </span>
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-[22px] sm:text-[25px] font-bold text-white mb-3 leading-snug tracking-tight">
+                        <h3 className="text-xl sm:text-[23px] md:text-[25px] font-bold text-white mb-2 sm:mb-3 leading-snug tracking-tight">
                           {service.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-sm text-white/80 leading-relaxed mb-5 line-clamp-3">
+                        <p className="text-xs sm:text-sm text-white/85 leading-relaxed mb-4 sm:mb-5 line-clamp-3">
                           {service.description}
                         </p>
 
                         {/* Feature pills */}
                         {features.length > 0 && (
-                          <div className="flex flex-wrap items-center gap-2">
+                          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                             {features.slice(0, 2).map((feat, fIdx) => (
                               <span
                                 key={fIdx}
-                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-[11px] font-medium text-white"
+                                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/15 border border-white/20 text-[10px] sm:text-[11px] font-medium text-white truncate max-w-[135px] sm:max-w-none"
                               >
                                 <span className="text-cyan-300 text-[10px]">✓</span>
-                                {feat}
+                                <span className="truncate">{feat}</span>
                               </span>
                             ))}
                           </div>
@@ -500,24 +540,24 @@ export const ServicesSection: React.FC = () => {
 
                       {/* ── Bottom row ── */}
                       <div
-                        className={`relative z-10 pt-4 mt-2 border-t border-white/15 flex items-center justify-between transition-all duration-300 ${
+                        className={`relative z-10 pt-3 sm:pt-4 mt-2 border-t border-white/15 flex items-center justify-between transition-all duration-300 ${
                           isActive
                             ? "opacity-100 translate-y-0"
                             : "opacity-0 translate-y-1 pointer-events-none"
                         }`}
                       >
-                        <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex items-center gap-2 min-w-0 pr-2">
                           <span className="relative flex h-2 w-2 shrink-0">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
                           </span>
-                          <span className="text-xs font-semibold text-white/90 tracking-wide truncate max-w-[230px]">
+                          <span className="text-[11px] sm:text-xs font-semibold text-white/90 tracking-wide truncate max-w-[140px] sm:max-w-[230px]">
                             {service.badge || "Dedicated Bandwidth"}
                           </span>
                         </div>
 
-                        <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#1d4ed8] border border-white/25 flex items-center justify-center transition-all duration-300 group">
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                        <div className="w-9 h-9 sm:w-11 sm:h-11 shrink-0 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#1d4ed8] border border-white/25 flex items-center justify-center transition-all duration-300 group">
+                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       </div>
                     </div>
@@ -527,7 +567,7 @@ export const ServicesSection: React.FC = () => {
             </div>
 
             {/* ── Controls row ── */}
-            <div className="mt-6 flex items-center pl-1">
+            <div className="mt-6 flex items-center justify-center lg:justify-start">
               {/* Dot indicators */}
               <div className="flex items-center gap-1.5">
                 {servicesList.map((_, i) => (

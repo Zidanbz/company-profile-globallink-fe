@@ -212,7 +212,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="kontak"
-      className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-200"
+      className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28 transition-colors duration-200"
     >
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">

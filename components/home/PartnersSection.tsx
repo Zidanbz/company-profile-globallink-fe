@@ -358,7 +358,7 @@ export const PartnersSection: React.FC = () => {
           <div className="flex overflow-hidden select-none">
             <motion.div
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+              transition={{ duration: 65, ease: "linear", repeat: Infinity }}
               className="flex items-center gap-12 sm:gap-20 shrink-0 pr-12 sm:pr-20"
             >
               {loopPartners.map((partner, idx) => (
@@ -402,7 +402,7 @@ export const PartnersSection: React.FC = () => {
           <div className="flex overflow-hidden select-none py-1">
             <motion.div
               animate={{ x: ["-50%", "0%"] }}
-              transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+              transition={{ duration: 70, ease: "linear", repeat: Infinity }}
               className="flex items-center gap-10 sm:gap-16 shrink-0 pr-10 sm:pr-16"
             >
               {loopClients.map((client, idx) => (
