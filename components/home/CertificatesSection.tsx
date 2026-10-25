@@ -14,19 +14,19 @@ interface CertificateItem {
 const CERTIFICATES: CertificateItem[] = [
   {
     id: "iso-9001",
-    badge: "https://web.globallink.net.id/wp-content/uploads/2025/03/1-CBQA-ISO-9001-1.png",
+    badge: "/images/badge-circle-9001@2x.png",
     code: "ISO 9001:2015",
     description: "Quality Management System",
   },
   {
     id: "iso-45001",
-    badge: "https://web.globallink.net.id/wp-content/uploads/2025/03/1-CBQA-ISO-45001-1.png",
+    badge: "/images/badge-circle-45001@2x.png",
     code: "ISO 45001:2018",
     description: "Occupational Health & Safety",
   },
   {
     id: "iso-27001",
-    badge: "https://web.globallink.net.id/wp-content/uploads/2025/03/1-CBQA-ISO-27001-1.png",
+    badge: "/images/badge-circle-27001@2x.png",
     code: "ISO/IEC 27001:2022",
     description: "Information Security Management",
   },

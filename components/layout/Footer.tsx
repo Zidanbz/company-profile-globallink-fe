@@ -54,14 +54,14 @@ export const Footer: React.FC = () => {
             {/* Column 1: Company Info */}
             <div className="space-y-4">
               <img
-                src="https://web.globallink.net.id/wp-content/uploads/2025/03/logo-mgm.png"
+                src="/images/globallink-logo.png"
                 alt="Globallink"
-                className="h-11 sm:h-12 w-auto object-contain dark:hidden"
+                className="h-10 sm:h-11 w-auto object-contain dark:hidden"
               />
               <img
-                src="https://web.globallink.net.id/wp-content/uploads/2025/03/logo_putih-1.png"
+                src="/images/globallink-logo-white.png"
                 alt="Globallink"
-                className="h-11 sm:h-12 w-auto object-contain hidden dark:block"
+                className="h-10 sm:h-11 w-auto object-contain hidden dark:block"
               />
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-[260px]">
                 {content.footer_description}
