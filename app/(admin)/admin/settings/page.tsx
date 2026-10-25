@@ -131,13 +131,13 @@ export default function AdminSettingsPage() {
               value={formData.site_logo}
               onChange={(url) => handleChange("site_logo", url)}
               onDelete={() => handleChange("site_logo", "")}
-              minWidth={200}
-              minHeight={50}
-              aspectRatio={4 / 1}
-              aspectRatioLabel="4:1 Landscape (Logo)"
+              minWidth={80}
+              minHeight={25}
+              aspectRatio={null}
+              aspectRatioLabel="Auto / Sesuai Logo"
               previewAspectClass="aspect-[4/1] max-w-sm"
               placeholderText="Pilih gambar logo perusahaan"
-              helperText="Format PNG transparan, WebP, atau SVG. Gambar yang lebih besar dari standar dapat dipotong (crop) presisi."
+              helperText="Format PNG transparan, WebP, atau SVG. Sistem otomatis menyesuaikan dengan proporsi logo asli."
             />
           </div>
         </div>

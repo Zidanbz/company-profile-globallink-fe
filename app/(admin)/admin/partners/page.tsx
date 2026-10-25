@@ -421,13 +421,13 @@ export default function AdminPartnersPage() {
                   value={formData.logoUrl}
                   onChange={(url) => setFormData({ ...formData, logoUrl: url, svgContent: "" })}
                   onDelete={() => setFormData({ ...formData, logoUrl: "" })}
-                  minWidth={200}
-                  minHeight={80}
-                  aspectRatio={1}
-                  aspectRatioLabel="Bebas / 1:1"
+                  minWidth={60}
+                  minHeight={20}
+                  aspectRatio={null}
+                  aspectRatioLabel="Auto / Sesuai Logo"
                   previewAspectClass="aspect-video max-w-[220px]"
                   placeholderText="Pilih logo mitra/klien"
-                  helperText="Format PNG transparan, WebP, atau JPG. Gambar akan dikonversi menjadi data HD dan disimpan 100% langsung di database."
+                  helperText="Format PNG transparan, WebP, atau JPG. Sistem otomatis menyesuaikan dengan dimensi logo asli agar tidak terpotong."
                   storeAsBase64={true}
                 />
               </div>

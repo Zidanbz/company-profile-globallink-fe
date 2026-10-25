@@ -22,13 +22,14 @@ export interface ImageUploadWithCropProps {
   onDelete?: () => void;
   minWidth?: number; // Minimum recommended width in pixels
   minHeight?: number; // Minimum recommended height in pixels
-  aspectRatio?: number; // e.g. 16/9, 4/3, 1/1
-  aspectRatioLabel?: string; // e.g. "16:9 Landscape", "4:3", "1:1 Square"
+  aspectRatio?: number | null; // e.g. 16/9, 4/3, 1/1, or null for auto/free
+  aspectRatioLabel?: string; // e.g. "16:9 Landscape", "4:3", "Auto / Sesuai Logo"
   helperText?: string;
   previewAspectClass?: string; // e.g. "aspect-video", "aspect-[4/3]", "aspect-square"
   placeholderText?: string;
   className?: string;
   storeAsBase64?: boolean; // When true, converts image to HD Base64 directly for database storage (no local disk upload)
+  objectFit?: "cover" | "contain";
 }
 
 export const ImageUploadWithCrop: React.FC<ImageUploadWithCropProps> = ({
@@ -36,17 +37,23 @@ export const ImageUploadWithCrop: React.FC<ImageUploadWithCropProps> = ({
   value,
   onChange,
   onDelete,
-  minWidth = 1200,
-  minHeight = 675,
-  aspectRatio = 16 / 9,
-  aspectRatioLabel = "16:9",
+  minWidth = 800,
+  minHeight = 450,
+  aspectRatio,
+  aspectRatioLabel,
   helperText,
   previewAspectClass = "aspect-video",
   placeholderText = "Belum ada gambar yang dipilih",
   className = "",
   storeAsBase64 = false,
+  objectFit,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const isAutoMode = aspectRatio === null;
+  const resolvedAspectRatio = isAutoMode ? null : (aspectRatio ?? 16 / 9);
+  const resolvedLabel = aspectRatioLabel || (isAutoMode ? "Auto / Sesuai Logo" : "16:9");
+  const resolvedObjectFit = objectFit || (isAutoMode ? "contain" : "cover");
 
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [cropperOpen, setCropperOpen] = useState<boolean>(false);
@@ -124,7 +131,11 @@ export const ImageUploadWithCrop: React.FC<ImageUploadWithCropProps> = ({
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/70 dark:border-blue-800/60 text-[11px] font-medium text-[#0066ff] dark:text-blue-300">
           <Info className="w-3 h-3 text-[#0066ff] dark:text-blue-400" />
           <span>
-            Standar: Min <strong className="font-semibold">{minWidth}×{minHeight} px</strong> ({aspectRatioLabel})
+            {isAutoMode ? (
+              <>Mode: <strong className="font-semibold">Auto-Fit Logo</strong> (Menyesuaikan Dimensi Asli)</>
+            ) : (
+              <>Standar: Min <strong className="font-semibold">{minWidth}×{minHeight} px</strong> ({resolvedLabel})</>
+            )}
           </span>
         </div>
       </div>
@@ -140,7 +151,7 @@ export const ImageUploadWithCrop: React.FC<ImageUploadWithCropProps> = ({
               <img
                 src={value}
                 alt={label || "Preview Image"}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                className={`w-full h-full ${resolvedObjectFit === "contain" ? "object-contain p-2" : "object-cover"} transition-transform duration-300 group-hover:scale-[1.02]`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                 <span className="text-white text-xs font-medium truncate">{value}</span>
@@ -233,8 +244,8 @@ export const ImageUploadWithCrop: React.FC<ImageUploadWithCropProps> = ({
         sourceDimensions={sourceDimensions}
         minWidth={minWidth}
         minHeight={minHeight}
-        aspectRatio={aspectRatio}
-        aspectRatioLabel={aspectRatioLabel}
+        aspectRatio={resolvedAspectRatio}
+        aspectRatioLabel={resolvedLabel}
         onCropComplete={handleCropComplete}
         onSelectAnotherFile={() => {
           setCropperOpen(false);
