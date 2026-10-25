@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://globallink.co.id";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://web.globallink.net.id";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

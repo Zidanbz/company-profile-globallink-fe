@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://globallink.co.id",
+    url: "https://web.globallink.net.id",
     title: "Globallink — Smart IT Solution",
     description:
       "Lebih dari Sekadar Koneksi, Ini Tentang Masa Depan. Jaringan yang Menyatukan Indonesia.",
