@@ -91,12 +91,12 @@ export const AdminSidebar: React.FC = () => {
             <img
               src="/images/logo-globallink-blue.png"
               alt="Globallink Smart IT Solution"
-              className="h-9 w-auto object-contain dark:hidden"
+              className="h-7 w-auto object-contain dark:hidden"
             />
             <img
               src="/images/logo-globallink-white.png"
               alt="Globallink Smart IT Solution"
-              className="h-9 w-auto object-contain hidden dark:block"
+              className="h-7 w-auto object-contain hidden dark:block"
             />
           </Link>
         </div>

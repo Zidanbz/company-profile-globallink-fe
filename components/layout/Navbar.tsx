@@ -118,12 +118,12 @@ export const Navbar: React.FC = () => {
               <img
                 src="/images/logo-globallink-blue.png"
                 alt="Globallink"
-                className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105 dark:hidden"
+                className="h-6 sm:h-7 md:h-[30px] w-auto object-contain transition-transform duration-200 group-hover:scale-105 dark:hidden"
               />
               <img
                 src="/images/logo-globallink-white.png"
                 alt="Globallink"
-                className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105 hidden dark:block"
+                className="h-6 sm:h-7 md:h-[30px] w-auto object-contain transition-transform duration-200 group-hover:scale-105 hidden dark:block"
               />
             </Link>
 

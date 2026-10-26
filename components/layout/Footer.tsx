@@ -56,12 +56,12 @@ export const Footer: React.FC = () => {
               <img
                 src="/images/logo-globallink-blue.png"
                 alt="Globallink"
-                className="h-10 sm:h-11 w-auto object-contain dark:hidden"
+                className="h-7 sm:h-8 w-auto object-contain dark:hidden"
               />
               <img
                 src="/images/logo-globallink-white.png"
                 alt="Globallink"
-                className="h-10 sm:h-11 w-auto object-contain hidden dark:block"
+                className="h-7 sm:h-8 w-auto object-contain hidden dark:block"
               />
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-[260px]">
                 {content.footer_description}
