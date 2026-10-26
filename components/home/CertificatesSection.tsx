@@ -14,19 +14,19 @@ interface CertificateItem {
 const CERTIFICATES: CertificateItem[] = [
   {
     id: "iso-9001",
-    badge: "/images/badge-circle-9001@2x.png",
+    badge: "/images/iso-9001.png",
     code: "ISO 9001:2015",
     description: "Quality Management System",
   },
   {
     id: "iso-45001",
-    badge: "/images/badge-circle-45001@2x.png",
+    badge: "/images/iso-45001.png",
     code: "ISO 45001:2018",
     description: "Occupational Health & Safety",
   },
   {
     id: "iso-27001",
-    badge: "/images/badge-circle-27001@2x.png",
+    badge: "/images/iso-27001.png",
     code: "ISO/IEC 27001:2022",
     description: "Information Security Management",
   },
@@ -75,11 +75,11 @@ export const CertificatesSection: React.FC = () => {
               className="group flex flex-col items-center text-center cursor-default"
             >
               {/* Emblem Badge Icon */}
-              <div className="relative mb-2.5 transition-transform duration-300 ease-out group-hover:scale-105">
+              <div className="relative mb-3 transition-transform duration-300 ease-out group-hover:scale-105 flex items-center justify-center">
                 <img
                   src={cert.badge}
                   alt={`${cert.code} Certification`}
-                  className="w-16 sm:w-18 lg:w-20 h-auto object-contain select-none"
+                  className="w-20 sm:w-24 lg:w-28 h-20 sm:h-24 lg:h-28 object-contain select-none drop-shadow-sm"
                   loading="lazy"
                 />
               </div>
