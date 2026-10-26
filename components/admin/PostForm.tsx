@@ -89,7 +89,7 @@ export const PostForm: React.FC<PostFormProps> = ({
               Kembali
             </Button>
           </Link>
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
             {isEditing ? "Edit Artikel" : "Buat Artikel Baru"}
           </h2>
         </div>
@@ -151,7 +151,7 @@ export const PostForm: React.FC<PostFormProps> = ({
         {/* Right Column: Settings & Thumbnail */}
         <div className="lg:col-span-4 space-y-6">
           <Card padding="lg" className="space-y-6">
-            <h3 className="font-bold text-sm text-slate-800 border-b border-slate-100 pb-3">
+            <h3 className="font-bold text-sm text-slate-800 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3">
               Status & Visibilitas
             </h3>
 
@@ -168,7 +168,7 @@ export const PostForm: React.FC<PostFormProps> = ({
           </Card>
 
           <Card padding="lg" className="space-y-4">
-            <h3 className="font-bold text-sm text-slate-800 border-b border-slate-100 pb-3">
+            <h3 className="font-bold text-sm text-slate-800 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3">
               Thumbnail Artikel
             </h3>
 

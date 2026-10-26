@@ -143,8 +143,8 @@ export default function AdminAboutPage() {
     <div className="max-w-5xl mx-auto space-y-8 pb-20">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Manajemen Tentang Kami</h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Manajemen Tentang Kami</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Ubah deskripsi profil perusahaan, visi, misi, dan data statistik pencapaian.
         </p>
       </div>

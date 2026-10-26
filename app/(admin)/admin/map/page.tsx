@@ -145,7 +145,7 @@ export default function AdminMapPage() {
           <TableBody>
             {locations.map((loc) => (
               <TableRow key={loc.id}>
-                <TableCell className="font-bold text-slate-900">
+                <TableCell className="font-bold text-slate-900 dark:text-white">
                   {loc.name}
                 </TableCell>
                 <TableCell>
@@ -153,17 +153,17 @@ export default function AdminMapPage() {
                     {loc.category.replace("_", " ")}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-xs font-mono text-slate-500">
+                <TableCell className="text-xs font-mono text-slate-500 dark:text-slate-400">
                   {Number(loc.latitude).toFixed(4)}, {Number(loc.longitude).toFixed(4)}
                 </TableCell>
-                <TableCell className="text-xs text-slate-500 max-w-xs truncate">
+                <TableCell className="text-xs text-slate-500 dark:text-slate-400 max-w-xs truncate">
                   {loc.description || "-"}
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="inline-flex items-center gap-2">
                     <Link href={`/admin/map/${loc.id}/edit`}>
                       <button
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-brand-600 hover:bg-slate-100 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="Edit"
                       >
                         <Edit3 className="w-4 h-4" />
