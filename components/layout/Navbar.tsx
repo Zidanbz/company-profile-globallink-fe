@@ -116,12 +116,12 @@ export const Navbar: React.FC = () => {
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center gap-2 group shrink-0 py-0.5">
               <img
-                src="/images/globallink-logo.png"
+                src="/images/logo-globallink-blue.png"
                 alt="Globallink"
                 className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105 dark:hidden"
               />
               <img
-                src="/images/globallink-logo-white.png"
+                src="/images/logo-globallink-white.png"
                 alt="Globallink"
                 className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105 hidden dark:block"
               />

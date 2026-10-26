@@ -89,12 +89,12 @@ export const AdminSidebar: React.FC = () => {
         <div className="px-2 py-3 mb-6">
           <Link href="/admin" className="inline-block">
             <img
-              src="/images/globallink-logo.png"
+              src="/images/logo-globallink-blue.png"
               alt="Globallink Smart IT Solution"
               className="h-9 w-auto object-contain dark:hidden"
             />
             <img
-              src="/images/globallink-logo-white.png"
+              src="/images/logo-globallink-white.png"
               alt="Globallink Smart IT Solution"
               className="h-9 w-auto object-contain hidden dark:block"
             />

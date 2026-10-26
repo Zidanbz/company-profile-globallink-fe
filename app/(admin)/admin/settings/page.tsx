@@ -23,7 +23,7 @@ export default function AdminSettingsPage() {
   const [formData, setFormData] = useState({
     site_name: "Globallink",
     site_tagline: "Smart IT Solution",
-    site_logo: "/images/globallink-logo.png",
+    site_logo: "/images/logo-globallink-blue.png",
     site_favicon: "/favicon.png",
     seo_meta_title:
       "Globallink — Smart IT Solution & High-Speed Network Infrastructure",

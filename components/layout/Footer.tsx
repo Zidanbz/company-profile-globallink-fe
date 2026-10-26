@@ -54,12 +54,12 @@ export const Footer: React.FC = () => {
             {/* Column 1: Company Info */}
             <div className="space-y-4">
               <img
-                src="/images/globallink-logo.png"
+                src="/images/logo-globallink-blue.png"
                 alt="Globallink"
                 className="h-10 sm:h-11 w-auto object-contain dark:hidden"
               />
               <img
-                src="/images/globallink-logo-white.png"
+                src="/images/logo-globallink-white.png"
                 alt="Globallink"
                 className="h-10 sm:h-11 w-auto object-contain hidden dark:block"
               />
