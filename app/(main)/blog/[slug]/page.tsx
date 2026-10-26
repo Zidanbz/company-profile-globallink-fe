@@ -9,6 +9,8 @@ interface PageProps {
   params: { slug: string };
 }
 
+export const dynamic = "force-dynamic";
+
 // Dynamic Metadata per SEO rule
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
@@ -23,6 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       },
     };
   } catch (e) {
+    console.warn(`[generateMetadata] Post not found or SSR fetch error for slug "${params.slug}":`, e);
     return {
       title: "Artikel Tidak Ditemukan | Globallink",
     };
@@ -34,6 +37,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   try {
     post = await postsApi.getPublicPostBySlug(params.slug);
   } catch (error) {
+    console.error(`[BlogPostPage] Error fetching post with slug "${params.slug}":`, error);
     // If not found or API error during build
     notFound();
   }

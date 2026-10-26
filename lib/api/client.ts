@@ -11,7 +11,20 @@ function getBaseUrl(): string {
     return "/api/v1";
   }
   // Server-side (SSR / Node.js)
-  return process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5001/api/v1";
+  // 1. Explicit internal Docker API URL
+  if (process.env.INTERNAL_API_URL) {
+    return process.env.INTERNAL_API_URL;
+  }
+  // 2. If NEXT_PUBLIC_API_URL is an absolute HTTP URL
+  if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith("http")) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  // 3. Inside Docker container in production, backend is on service name 'globallink-be'
+  if (process.env.NODE_ENV === "production") {
+    return "http://globallink-be:5001/api/v1";
+  }
+  // 4. Default for local development
+  return "http://127.0.0.1:5001/api/v1";
 }
 
 export async function apiClient<T>(

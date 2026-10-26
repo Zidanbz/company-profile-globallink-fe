@@ -30,7 +30,9 @@ export const postsApi = {
   },
 
   getPublicPostBySlug: async (slug: string): Promise<Post> => {
-    return apiClient<Post>(`/posts/${slug}`);
+    return apiClient<Post>(`/posts/${slug}`, {
+      cache: "no-store",
+    });
   },
 
   // Admin endpoints
